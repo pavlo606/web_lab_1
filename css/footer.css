@@ -1,0 +1,31 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer--section {
+    padding-top: 63px;
+    padding-bottom: 49px;
+    background: 
+        url("../images/element1.svg"),
+        linear-gradient(183deg, #67C3F3 -8.57%, #5A98F2 82.96%);
+    background-repeat: no-repeat;
+    background-position: 
+        -18px 74px,
+        0px;
+}
+
+.footer__nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer__nav ul {
+    display: flex;
+}
+
+.footer__nav--item {
+    margin-left: 179px;
+}

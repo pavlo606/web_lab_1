@@ -1,0 +1,28 @@
+.hero__container {
+    margin-top: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero__line {
+    margin: 0px;
+}
+
+.hero__inner {
+    min-width: 360px;
+}
+
+.hero__element {
+    position: relative;
+    top: 230px;
+    left: -60px;
+}
+
+.hero__image {
+    margin-left: 100px;
+}
+
+.hero__button {
+    margin-top: 50px;
+}
