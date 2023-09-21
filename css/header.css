@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__nav ul {
+    display: flex;
+    padding-left: 0px;
+}
+
+.header__nav--item {
+    opacity: 50%;
+    margin-right: 42.62px;
+}
+
+.header__nav .home {
+    opacity: 100%;
+    font-weight: 500;
+}
+
+.header__nav a {
+    text-decoration: none;
+    color: #1F1534;
+}

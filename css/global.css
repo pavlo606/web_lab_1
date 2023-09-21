@@ -1,0 +1,55 @@
+body {
+    font-family: 'Roboto', "Arial", sans-serif;
+    font-size: larger;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+li {
+    display: block;
+}
+
+.button {
+    width: 200px;
+    height: 56px;
+    border-radius: 30px;
+    border-color: #458FF6;
+    color: #458FF6;
+    background-color: #ffffff;
+    border-style: solid;
+}
+
+.button:hover {
+    background-color: #458FF6;
+    color: #ffffff;
+}
+
+h1 {
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+h3 {
+    color: black;
+    font-weight: 500;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #7D7987;
+    margin-top: 30px;
+    line-height: 1.7;
+}
+
+hr {
+    width: 56px;
+    height: 2px;
+    background-color: black;
+    border: 0px;
+    border-radius: 2px;
+}
