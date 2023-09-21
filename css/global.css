@@ -8,18 +8,42 @@ body {
     max-width: 1200px;
 }
 
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 0px 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
 li {
     display: block;
 }
 
 .button {
+    text-decoration: none;
     width: 200px;
-    height: 56px;
+    height: 23px;
+    text-align: center;
+    padding: 15px 0px;
+    border-width: 2px;
     border-radius: 30px;
     border-color: #458FF6;
     color: #458FF6;
     background-color: #ffffff;
     border-style: solid;
+    display: block;
+    font-weight: 500;
 }
 
 .button:hover {
@@ -29,7 +53,7 @@ li {
 
 h1 {
     color: black;
-    font-size: 40px;
+    font-size: 2.5rem;
     font-weight: 500;
 }
 
@@ -39,7 +63,7 @@ h3 {
 }
 
 p {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 300;
     color: #7D7987;
     margin-top: 30px;

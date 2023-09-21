@@ -49,10 +49,22 @@
 
 .article__card__text {
     margin: 29px 50px 42px 35px;
+    padding-bottom: 42px;
 }
 
 .article__button {
-    display: block;
     margin: 0px auto;
     margin-top: 72px;
+}
+
+@media screen and (max-width: 1051px) {
+    .article__card__block {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .article__card__image {
+        width: 100%;
+    }
 }

@@ -13,7 +13,10 @@
     <section class="hero">
         <div class="container">
             <header class="header">
-                <nav class="header__nav">
+                <div class="header__menu" onclick="toggleMenu()">
+                    <img src="./images/menu_icon.svg" alt="Menu icon">
+                </div>
+                <nav class="header__nav" id="nav-links">
                     <ul>
                         <li class="header__nav--item home"><a href="#home">Home</a></li>
                         <li class="header__nav--item"><a href="#find_a_doctor">Find a doctor</a></li>
@@ -22,7 +25,7 @@
                         <li class="header__nav--item"><a href="#about_us">About us</a></li>
                     </ul>
                 </nav>
-                <img src="./images/logo.svg" alt="Logo">
+                <img class="logo" src="./images/logo.svg" alt="Logo">
             </header>
         </div>
         <div class="container hero__container">
@@ -32,17 +35,16 @@
                 <p>Our dedicated patient engagement app and web portal allow you to access
                     information instantaneously
                     (no tedeous form, long calls, or administrative hassle) and securely</p>
-                <button class="button hero__button">Download &#8595;</button>
+                <a class="button hero__button" href="#download">Download &#8595;</a>
             </div>
-            <img class="hero__image" src="./images/image1.png">
-            <img class="hero__element" src="./images/element1.svg">
+            <!-- <img class="hero__image" src="./images/image1.png">
+            <img class="hero__element" src="./images/element1.svg"> -->
         </div>
     </section>
     <section class="article">
         <div class="container article__container">
             <h1 class="article__title">Check out our latest article</h1>
             <hr class="article__line">
-            <!-- <img class="article__element" src="./images/element1.svg"> -->
             <div class="article__card__block">
                 <div class="article__card">
                     <img class="article__card__image" src="./images/image4.png" alt="" width="350">
@@ -72,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button article__button">View all</button>
+            <a class="button article__button" href="#view_all">View all</a>
         </div>
     </section>
     <section class="customer">
@@ -107,7 +109,7 @@
     <section class="footer--section">
         <div class="container">
             <footer class="footer">
-                <img src="./images/logo_white.svg" alt="">
+                <img class="logo" src="./images/logo_white.svg" alt="">
                 <nav class="footer__nav">
                     <ul>
                         <li class="footer__nav--item"><a href="#company">Company</a></li>
@@ -118,5 +120,7 @@
             </footer>
         </div>
     </section>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

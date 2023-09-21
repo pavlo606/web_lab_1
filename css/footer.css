@@ -24,8 +24,39 @@
 
 .footer__nav ul {
     display: flex;
+    justify-content: space-between;
+    padding-left: 0;
 }
 
 .footer__nav--item {
     margin-left: 179px;
+}
+
+.footer__nav--item a:hover {
+    color: red;
+}
+
+@media screen and (max-width: 958px) {
+    .footer__nav--item {
+        margin-left: 100px
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer__nav ul {
+        flex-direction: column;
+        margin-bottom: 40px;
+    }
+
+    .footer__nav--item {
+        margin: 10px 0;
+    }
+
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer--section {
+        padding-top: 0;
+    }
 }
