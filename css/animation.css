@@ -1,0 +1,34 @@
+@keyframes logo_zoom {
+    0% {
+        transform: scale(100%);
+    }
+    50% {
+        transform: scale(110%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}
+
+@keyframes button_color {
+    from {
+        color: #458FF6;
+        background-color: #ffffff; 
+    }
+    to {
+        background-color: #458FF6;
+        color: #ffffff;
+    }
+}
+
+@keyframes article_shadow {
+    from {
+        box-shadow: rgba(229, 233, 246, 0.40) 5px 9px 24px;
+        border-radius: 30px;
+    }
+    to {
+        box-shadow: rgba(229, 233, 246, 0.782) 5px 9px 24px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+}

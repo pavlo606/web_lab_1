@@ -1,6 +1,6 @@
 .hero__container {
     margin-top: 175px;
-    padding: 40px 0;
+    padding: 40px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;

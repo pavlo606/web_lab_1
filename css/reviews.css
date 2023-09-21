@@ -105,6 +105,7 @@
     .customer__info {
         flex-direction: column-reverse;
         padding: 0 20px;
+        margin-top: 25px;
     }
 
     .customer__name {
@@ -117,5 +118,15 @@
 
     .customer__review {
         font-size: 0.9rem;
+    }
+
+    .customer {
+        margin-top: 40px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .customer__block {
+        padding: 25px 0;
     }
 }

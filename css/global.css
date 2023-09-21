@@ -47,6 +47,9 @@ li {
 }
 
 .button:hover {
+    
+    animation-name: button_color;
+    animation-duration: 500ms;
     background-color: #458FF6;
     color: #ffffff;
 }
@@ -76,4 +79,9 @@ hr {
     background-color: black;
     border: 0px;
     border-radius: 2px;
+}
+
+.logo:hover {
+    animation-name: logo_zoom;
+    animation-duration: 1s;
 }
