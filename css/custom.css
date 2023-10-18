@@ -1,4 +1,12 @@
 .card {
-    margin: 10px;
+    margin: 8px;
     width: 15rem;
+}
+
+.selected_page {
+    background-color: rgb(220, 220, 220);
+}
+
+.card-img-top {
+    max-height: 15rem;
 }
