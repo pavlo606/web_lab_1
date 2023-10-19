@@ -36,9 +36,13 @@ let editItemId = "";
 let insects = [];
 
 const onRemoveItem = async (id) => {
-    await deleteInsects(id);
+    const resp_insects = await deleteInsects(id);
 
-    refetchAllInsects(insects);
+    insects = resp_insects;
+
+    setPage(0);
+
+    renderItemsList(insects, onRemoveItem, onEditItem);
 };
 
 const onEditItem = (id) => {
@@ -53,11 +57,15 @@ const onEditItem = (id) => {
 };
 
 const refetchAllInsects = async () => {
+    console.log("loading insects...");
     const allInsects = await getAllInsects();
 
     insects = allInsects;
 
+    setPage(0);
+
     renderItemsList(insects, onRemoveItem, onEditItem);
+    console.log("loaded!");
 };
 
 const showHomePage = () => {
@@ -120,7 +128,7 @@ submitButton.addEventListener("click", async (event) => {
     clearInputs();
 
     if (editMode) {
-        await putInsects({
+        const resp_insects = await putInsects({
             id: editItemId,
             name, 
             species, 
@@ -129,8 +137,9 @@ submitButton.addEventListener("click", async (event) => {
             is_dangerous,
             age
         });
+        insects = resp_insects;
     } else {
-        await postInsects({ 
+        const resp_insects = await postInsects({ 
             id: uuid.v1(), 
             name, 
             species, 
@@ -139,13 +148,16 @@ submitButton.addEventListener("click", async (event) => {
             is_dangerous,
             age 
         });
+        insects = resp_insects;
     }
 
     showHomePage();
     editMode = false;
     editItemId = "";
 
-    refetchAllInsects();
+    setPage(0);
+
+    renderItemsList(insects, onRemoveItem, onEditItem);
 });
 
 cancelButton.addEventListener("click", () => {
@@ -168,8 +180,6 @@ searchButton.addEventListener("click", () => {
 });
 
 searchCancelButton.addEventListener("click", () => {
-    setPage(0);
-
     refetchAllInsects();
 
     searchInput.value = "";
