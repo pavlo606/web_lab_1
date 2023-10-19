@@ -34,22 +34,32 @@
             </nav>
         </header>
         <br>
-        <div id="home_page" style="display: flex;">
-            <div class="w-25">
-                <h3 class="fw-light">Manage Insects</h3><br>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="sort_insects">
-                    <label for="sort_insects" class="fw-bold text-muted">Sort by the oldest insect</label>
+        <div id="home_page">
+            <div style="display: flex;">
+                <div class="w-25">
+                    <h3 class="fw-light">Manage Insects</h3><br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="sort_insects">
+                        <label for="sort_insects" class="fw-bold text-muted">Sort by the oldest insect</label>
+                    </div>
+                    <hr>
+                    <div class="d-flex flex-column align-items-center">
+                        <p class="fw-bold text-muted">Count average age:</p>
+                        <button id="count_button" type="button" class="w-50 btn btn-primary">Count</button><br>
+                        <p class="text-muted">Average age: <span id="middle_age_text" class="fw-bold text-black">0 mounths</span></p>
+                    </div>
                 </div>
-                <hr>
-                <div class="d-flex flex-column align-items-center">
-                    <p class="fw-bold text-muted">Count average age:</p>
-                    <button id="count_button" type="button" class="w-50 btn btn-primary">Count</button><br>
-                    <p class="text-muted">Average age: <span id="middle_age_text" class="fw-bold text-black">0 mounths</span></p>
-                </div>
+                <ul class="border-start d-flex flex-wrap justify-content-start align-content-start w-100 p-0" id="items_container">
+                </ul>
             </div>
-            <ul class="border-start d-flex flex-wrap justify-content-start align-content-start w-100 p-0" id="items_container">
-            </ul>
+            <nav class="d-flex justify-content-center" aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" id="prev_page"><a class="page-link" href="#prev">Previous</a></li>
+                    <div class="d-flex mx-1" id="pagination">
+                    </div>
+                    <li class="page-item" id="next_page"><a class="page-link" href="#next">Next</a></li>
+                </ul>
+            </nav>
         </div>
 
 

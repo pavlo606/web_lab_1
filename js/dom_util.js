@@ -9,12 +9,17 @@ const ageInput = document.getElementById("age_input");
 const legsCountInput = document.getElementById("legs_input");
 const hasWingsCheckbox = document.getElementById("has_wings");
 const isDangerousCheckbox = document.getElementById("is_dangerous");
+const pagination = document.getElementById("pagination");
+
+let itemsLimit = 8;
+let itemsPage = 0;
+let pagesCount = 1;
 
 const speciesImages = {"Ants": "Ant.webp",
                     "Bees": "Bee.webp",
                     "Wasps": "Wasp.webp",
                     "Butterflies": "Butterfly.webp",
-                    "Beetles": "Beetle.webp",
+                    "Beetles": "Ladybug.webp",
                     "Weevils": "Weevil.webp",
                     "Crickets": "Cricket.webp",
                     "Dragonflies": "Dragonfly.webp",
@@ -40,6 +45,8 @@ const itemTemplate = ({ id, name, species, number_of_legs, has_wings, is_dangero
     </div>
 </li>`;
 
+const paginationTemplate = (pageNumer) => `<li id="page-${pageNumer}" class="page-item"><a class="page-link" href="#${pageNumer}">${pageNumer + 1}</a></li>`;
+
 export const addItemToPage = ({ id, name, species, number_of_legs, has_wings, is_dangerous, age }, onRemoveItem, onEditItem) => {
     itemsContainer.insertAdjacentHTML(
         "afterbegin",
@@ -61,18 +68,64 @@ export const addItemToPage = ({ id, name, species, number_of_legs, has_wings, is
 export const renderItemsList = (items, onRemoveItem, onEditItem) => {
     itemsContainer.innerHTML = "";
 
-    let final_items = [...items];
+    let final_items = [...items].reverse();
 
     if (sortInsectsCheckBox.checked) {
-        final_items = [...items].sort(
+        final_items.sort(
             (item1, item2) => (item1.age < item2.age) ? 1 : (item1.age > item2.age) ? -1 : 0
         );
     }
 
-    for (const item of final_items) {
-        addItemToPage(item, onRemoveItem, onEditItem);
+    for (let i = itemsPage * itemsLimit + itemsLimit; i > itemsPage * itemsLimit; i--) {
+        if (i > final_items.length && final_items.length > itemsPage * itemsLimit) {
+            i = final_items.length;
+        }
+        try {
+            addItemToPage(final_items[i - 1], onRemoveItem, onEditItem);
+        } catch (error) {
+            if (i === itemsPage * itemsLimit + itemsLimit) {
+                itemsContainer.innerHTML = `<h2>No insects</h2>`;
+            }
+            break;
+        }
     }
+
+    renderPagination(items, onRemoveItem, onEditItem);
 };
+
+export const setPage = (page) => {
+    itemsPage = page;
+}
+
+export const changePage = (page) => {
+    if (page > 0 && itemsPage < pagesCount - 1) {
+        itemsPage += 1;
+    } else if (page < 0 && itemsPage > 0) {
+        itemsPage -= 1;
+    }
+    console.log(itemsPage);
+}
+
+const renderPagination = (items, onRemoveItem, onEditItem) => {
+    pagination.innerHTML = "";
+
+    pagesCount = Math.ceil(items.length / itemsLimit);
+
+    for (let page = 0; page < pagesCount; page++) {
+        pagination.insertAdjacentHTML("beforeend", paginationTemplate(page));
+
+        const pageBtn = document.getElementById(`page-${page}`);
+
+        pageBtn.addEventListener("click", () => {
+            itemsPage = page;
+            renderItemsList(items, onRemoveItem, onEditItem);
+        })
+
+        if (page === itemsPage) {
+            pageBtn.classList.add("active");
+        }
+    }
+}
 
 export const clearInputs = () => {
     nameInput.value = "";
