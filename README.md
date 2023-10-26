@@ -18,3 +18,7 @@
 Посилання на вітку [тут](https://github.com/pavlo606/web_lab_1/pull/4)
 
 ***
+### Лабораторна робота №5 (Варіант 5)
+Посилання на вітку [тут](https://github.com/pavlo606/web_lab_1/pull/5)
+
+***

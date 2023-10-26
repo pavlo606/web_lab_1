@@ -2,8 +2,16 @@ import {
     renderItemsList,
     getInputValues,
     clearInputs,
-    fillInputValues
+    fillInputValues,
+    setPage,
+    changePage
 } from "./dom_util.js"
+import {
+    getAllInsects,
+    postInsects,
+    putInsects,
+    deleteInsects
+} from "./api.js"
 
 const countButton = document.getElementById("count_button");
 const middleAgeText = document.getElementById("middle_age_text");
@@ -19,24 +27,22 @@ const homePage = document.getElementById("home_page");
 const createPage = document.getElementById("create_page");
 const searchForm = document.getElementById("search_form");
 const createPageTitle = document.getElementById("create_page_title");
+const prevPage = document.getElementById("prev_page");
+const nextPage = document.getElementById("next_page");
 
 let editMode = false;
 let editItemId = "";
 
-let insects = [{id: 0, name: "Ant", species: "Ants", "number_of_legs": 6, has_wings: false, is_dangerous: false, "age": 3},
-{id: 1, name: "Bee", species: "Bees", "number_of_legs": 6, has_wings: true, is_dangerous: true, "age": 2},
-{id: 2, name: "Arush-footed butterflies", species: "Butterflies", "number_of_legs": 6, has_wings: true, is_dangerous: false, "age": 5},
-{id: 3, name: "Hornet", species: "Wasps", "number_of_legs": 6, has_wings: true, is_dangerous: true, "age": 1},
-{id: 4, name: "Antlike flower beetles", species: "Weevils", "number_of_legs": 6, has_wings: false, is_dangerous: false, "age": 2},
-{id: 5, name: "Mosquito", species: "Flies", "number_of_legs": 6, has_wings: true, is_dangerous: false, "age": 8}];
-let insectsToDisplay = [];
+let insects = [];
 
-const onRemoveItem = (id) => {
-    insects = insects.filter(
-        (insect) => insect.id !== id
-    );
+const onRemoveItem = async (id) => {
+    const resp_insects = await deleteInsects(id);
 
-    refetchAllInsects(insects);
+    insects = resp_insects;
+
+    setPage(0);
+
+    renderItemsList(insects, onRemoveItem, onEditItem);
 };
 
 const onEditItem = (id) => {
@@ -50,28 +56,16 @@ const onEditItem = (id) => {
     fillInputValues(insect);
 };
 
-const refetchAllInsects = (items = insects) => {
-    insectsToDisplay = [...items];
+const refetchAllInsects = async () => {
+    console.log("loading insects...");
+    const allInsects = await getAllInsects();
 
-    renderItemsList(insectsToDisplay, onRemoveItem, onEditItem);
-};
+    insects = allInsects;
 
-const addItem = ({ name, species, number_of_legs, has_wings, is_dangerous, age }) => {
-    const generatedId = uuid.v1();
+    setPage(0);
 
-    const newItem = {
-        id: generatedId,
-        name,
-        species,
-        age,
-        number_of_legs,
-        has_wings,
-        is_dangerous
-    };
-
-    insects.push(newItem);
-
-    refetchAllInsects();
+    renderItemsList(insects, onRemoveItem, onEditItem);
+    console.log("loaded!");
 };
 
 const showHomePage = () => {
@@ -81,7 +75,7 @@ const showHomePage = () => {
     if (createPageButton.classList.contains("selected_page")) {
         createPageButton.classList.remove("selected_page");
     }
-    homePage.style.display = "flex";
+    homePage.style.display = "block";
     createPage.style.display = "none";
     searchForm.style.display = "flex";
 };
@@ -106,7 +100,7 @@ const showCreatePage = () => {
     }
 };
 
-submitButton.addEventListener("click", (event) => {
+submitButton.addEventListener("click", async (event) => {
     event.preventDefault();
 
     const { name, species, number_of_legs, has_wings, is_dangerous, age } = getInputValues();
@@ -134,23 +128,36 @@ submitButton.addEventListener("click", (event) => {
     clearInputs();
 
     if (editMode) {
-        let insect = insects.find(({ id: insect_id }) => editItemId == insect_id);
-        insect.name = name;
-        insect.species = species;
-        insect.number_of_legs = number_of_legs;
-        insect.has_wings = has_wings;
-        insect.is_dangerous = is_dangerous;
-        insect.age = age;
-        
+        const resp_insects = await putInsects({
+            id: editItemId,
+            name, 
+            species, 
+            number_of_legs, 
+            has_wings, 
+            is_dangerous,
+            age
+        });
+        insects = resp_insects;
     } else {
-        addItem({ name, species, number_of_legs, has_wings, is_dangerous, age });
+        const resp_insects = await postInsects({ 
+            id: uuid.v1(), 
+            name, 
+            species, 
+            number_of_legs, 
+            has_wings, 
+            is_dangerous,
+            age 
+        });
+        insects = resp_insects;
     }
 
     showHomePage();
     editMode = false;
     editItemId = "";
 
-    refetchAllInsects();
+    setPage(0);
+
+    renderItemsList(insects, onRemoveItem, onEditItem);
 });
 
 cancelButton.addEventListener("click", () => {
@@ -164,11 +171,12 @@ cancelButton.addEventListener("click", () => {
 
 searchButton.addEventListener("click", () => {
     const re = new RegExp(searchInput.value, "i");
-    const foundInsects = insects.filter(
+    insects = insects.filter(
         (insect) => re.test(insect.name) || re.test(insect.species)
     );
+    setPage(0);
 
-    refetchAllInsects(foundInsects);
+    renderItemsList(insects, onRemoveItem, onEditItem);
 });
 
 searchCancelButton.addEventListener("click", () => {
@@ -178,22 +186,34 @@ searchCancelButton.addEventListener("click", () => {
 });
 
 sortInsectsCheckBox.addEventListener("click", () => {
-    refetchAllInsects(insectsToDisplay);
+    renderItemsList(insects, onRemoveItem, onEditItem);
 });
 
 countButton.addEventListener("click", () => {
-    if (insectsToDisplay.length === 0) {
+    if (insects.length === 0) {
         return;
     }
 
     let sum = 0;
 
-    for (const insect of insectsToDisplay) {
+    for (const insect of insects) {
         sum += Number(insect.age);
     }
 
 
-    middleAgeText.textContent = `${(sum / insectsToDisplay.length).toFixed(2)} mounths`;
+    middleAgeText.textContent = `${(sum / insects.length).toFixed(2)} mounths`;
+});
+
+prevPage.addEventListener("click", () => {
+    changePage(-1);
+    
+    renderItemsList(insects, onRemoveItem, onEditItem);
+});
+
+nextPage.addEventListener("click", () => {
+    changePage(1);
+    
+    renderItemsList(insects, onRemoveItem, onEditItem);
 });
 
 homePageButton.addEventListener("click", () => {
