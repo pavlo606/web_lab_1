@@ -40,10 +40,10 @@ export const IconsWrapper = styled.div`
     margin: 10px 0;
 `;
 
-export const IconBase = styled(Icon)`
-    font-size: 24px;
-    color: ${({color}) => color};
-`;
+// export const IconBase = styled(Icon)`
+//     font-size: 24px;
+//     color: ${({color}) => color};
+// `;
 
 export const StyledText = styled.p`
     color: #8E8E93;

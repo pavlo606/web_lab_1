@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../../icons/logo.svg";
 import { HorizontalLine, StyledFooter, IconsWrapper, IconBase, Wrapper, StyledText } from "./Footer.styled";
+import LinkedImg from "../../../components/LinkedImg/LinkedImg";
 import Icon, {
     TwitterOutlined,
     YoutubeOutlined,
@@ -21,18 +22,10 @@ function Footer() {
                 <img src={logo} alt="" width={100}/>
 
                 <IconsWrapper>
-                    <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
-                        <IconBase component={FacebookOutlined} color='#4267B2'/>
-                    </a>
-                    <a href="https://twitter.com/" target="_blank" rel="noreferrer">
-                        <IconBase component={TwitterOutlined} color='#03A9F4' />
-                    </a>
-                    <a href="https://www.linkedin.com/home" target="_blank" rel="noreferrer">
-                        <IconBase component={LinkedinOutlined} color='#007AB9'/>
-                    </a>
-                    <a href="https://youtube.com/" target="_blank" rel="noreferrer">
-                        <IconBase component={YoutubeOutlined} color='#FF0000'/>
-                    </a>
+                    <LinkedImg href="https://www.facebook.com/" component={FacebookOutlined} color='#4267B2'/>
+                    <LinkedImg href="https://twitter.com/" component={TwitterOutlined} color='#03A9F4'/>
+                    <LinkedImg href="https://www.linkedin.com/home" component={LinkedinOutlined} color='#007AB9'/>
+                    <LinkedImg href="https://youtube.com/" component={YoutubeOutlined} color='#FF0000'/>
                 </IconsWrapper>
             </Wrapper>
             <HorizontalLine />
