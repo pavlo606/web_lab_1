@@ -7,7 +7,7 @@ import {
 import { Menu } from "antd";
 import logo from "../../../icons/logo.svg";
 import { LinkingWrapper, StyledHeader } from "./Layout.styled";
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const items = [
     {
@@ -28,11 +28,11 @@ const items = [
 ];
 
 function Layout() {
-    const [current, setCurrent] = useState('home');
+    const [currentPage, setCurrentPage] = useState('home');
 
     const onClick = (e) => {
         console.log('click ', e);
-        setCurrent(e.key);
+        setCurrentPage(e.key);
     };
     
     return (
@@ -42,9 +42,9 @@ function Layout() {
             <LinkingWrapper>
                 <Menu 
                     onClick={onClick} 
-                    selectedKeys={[current]} 
+                    selectedKeys={[]} 
                     mode="horizontal" 
-                    defaultSelectedKeys={['mail']}
+                    defaultSelectedKeys={['home']}
                     items={items}
                 />
             </LinkingWrapper>
