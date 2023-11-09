@@ -1,13 +1,12 @@
 import React from "react";
-import ArduinoImg from "../../icons/arduino_uno.jpg"
+import ArduinoImg from "../../icons/arduino_uno.jpg";
 import ArduinoMegaImg from "../../icons/arduino_mega.jpg";
 import SIM7600E from "../../icons/SIM7600E.jpg";
 import OLED_disp from "../../icons/OLED_display.jpg";
 import { HomeWrapper, DesctriptionWrapper, CardsWrapper, ButtonWrapper } from "./Home.styled";
-import { Card, Button } from "antd";
 import CardItem from "../../components/CardItem/CardItem";
-
-const { Meta } = Card;
+import { Link } from "react-router-dom";
+import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 
 const data = [
     {
@@ -54,7 +53,7 @@ function Home() {
                 ))}
             </CardsWrapper>
             <ButtonWrapper>
-                <Button styles={{}} size="large">View more</Button>
+                <PrimaryButton styles={{}} onClick={(e) => {}} size="large"><Link to="/catalog">View more</Link></PrimaryButton>
             </ButtonWrapper>
         </HomeWrapper>
     );

@@ -6,7 +6,6 @@ import Footer from "./Footer/Footer";
 function App() {
   return (
     <div>
-      <Layout />
       <Navigation />
       <Footer />
     </div>
