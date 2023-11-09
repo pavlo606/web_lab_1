@@ -17,6 +17,10 @@ export const FiltersContainer = styled.div`
 export const SelectWrapper = styled.div`
     display: flex;
     justify-content: space-around;
+
+    div {
+        margin: 0 5px;
+    }
 `
 
 export const SortDirectionButton = styled(PrimaryButton)`
