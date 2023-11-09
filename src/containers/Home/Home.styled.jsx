@@ -19,7 +19,8 @@ export const DesctriptionWrapper = styled.div`
 
 export const CardsWrapper = styled.div`
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 50px 50px;
 `;
 

@@ -1,36 +1,38 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import ArduinoImg from "../../icons/arduino_uno.jpg";
-import ArduinoMegaImg from "../../icons/arduino_mega.jpg";
-import SIM7600E from "../../icons/SIM7600E.jpg";
-import OLED_disp from "../../icons/OLED_display.jpg";
 import { HomeWrapper, DesctriptionWrapper, CardsWrapper, ButtonWrapper } from "./Home.styled";
 import CardItem from "../../components/CardItem/CardItem";
-import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import { ItemContext } from "../../context/Items";
 
-const data = [
-    {
-        title: "Arduino Mega 2560 R3 (CH340)",
-        text: "A replica of the original Arduino Mega2560 board. The CH340 chip is used as a USB-UART adapter ...",
-        image: ArduinoMegaImg,
-        price: 15.85,
-    },
-    {
-        title: "Communication module SIM7600E-H LTE Cat-4 4G/3G/2G, GNSS for Raspberry Pi, Jetson Nano",
-        text:"It is a 4G/3G/2G GNSS communication and positioning module that supports LTE CAT4 with a data rate of up to 150 Mbps for downlink data transmission with fairly low power consumption ...",
-        image: SIM7600E,
-        price: 68.09,
-    },
-    {
-        title: 'OLED display 0.96" I2C 128x64 (yellow-blue)',
-        text:
-            "A bright, economical, high-contrast OLED display will nicely decorate any of your designs, for which size and appearance are important ...",
-        image: OLED_disp,
-        price: 3.18,
-    },
-];
+let currentItemCount = 3;
 
 function Home() {
+    const data = useContext(ItemContext);
+
+    const [itemsToDisplay, setItemsToDisplay] = useState(data
+                                                        .sort((a,b) => b.rating - a.rating)
+                                                        .slice(0, currentItemCount));
+    const [buttonLabel, setButtonLabel] = useState("View more")
+
+    const showMore = (e) => {
+        e.preventDefault();
+        if (currentItemCount < data.length){
+            currentItemCount += 3;
+        } else {
+            currentItemCount = 3;
+        }
+        console.log(currentItemCount);
+        setItemsToDisplay(data
+                        .sort((a,b) => b.rating - a.rating)
+                        .slice(0, currentItemCount));
+        if (currentItemCount >= data.length) {
+            setButtonLabel("View less");
+        } else {
+            setButtonLabel("View more");
+        }
+    }
+    
     return (
         <HomeWrapper>
             <DesctriptionWrapper>
@@ -40,20 +42,22 @@ function Home() {
                     <p>Arduino designs, manufactures, and supports electronic devices and software, allowing people around the world to easily access advanced technologies that interact with the physical world. Our products are straightforward, simple, and powerful, ready to satisfy users’ needs from students to makers and all the way to professional developers.</p>
                 </div>
             </DesctriptionWrapper>
-            <h2>Our recommendations for you</h2>
+            <h2>Our best products</h2>
             <CardsWrapper>
-                {data.map(({ title, text, image, price }, idx) => (
+                {itemsToDisplay.map(({ title, text, image, price, id, rating }) => (
                     <CardItem
                         title={title}
                         text={text}
                         imageSrc={image}
                         price={price}
-                        id={idx}
+                        rating={rating}
+                        id={id}
+                        key={id}
                     />
                 ))}
             </CardsWrapper>
             <ButtonWrapper>
-                <PrimaryButton styles={{}} onClick={(e) => {}} size="large"><Link to="/catalog">View more</Link></PrimaryButton>
+                <PrimaryButton onClick={showMore} size="large">{ buttonLabel }</PrimaryButton>
             </ButtonWrapper>
         </HomeWrapper>
     );

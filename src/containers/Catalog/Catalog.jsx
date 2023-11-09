@@ -1,78 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiltersContainer, ItemsContainer, SelectWrapper, SortDirectionButton } from "./Catalog.styled";
 import CardItem from "../../components/CardItem/CardItem";
-import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import PrimarySelect from "../../components/PrimarySelect/PrimarySelect";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import {
     CaretUpOutlined,
     CaretDownOutlined
 } from "@ant-design/icons";
-import { Flex } from "antd";
-
-const data = [
-    {
-        id: "1",
-        title: "Arduino Mega 2560 R3 (CH340)",
-        text: "A replica of the original Arduino Mega2560 board. The CH340 chip is used as a USB-UART adapter ...",
-        image: require("../../icons/arduino_mega.jpg"),
-        price: 15.85,
-        category: "microcontrollers",
-    },
-    {
-        id: "2",
-        title: "Communication module SIM7600E-H LTE Cat-4 4G/3G/2G, GNSS for Raspberry Pi, Jetson Nano",
-        text:"It is a 4G/3G/2G GNSS communication and positioning module that supports LTE CAT4 with a data rate of up to 150 Mbps for downlink data transmission with fairly low power consumption ...",
-        image: require("../../icons/SIM7600E.jpg"),
-        price: 68.09,
-        category: "radio_modules",
-    },
-    {
-        id: "3",
-        title: 'OLED display 0.96" I2C 128x64 (yellow-blue)',
-        text:
-            "A bright, economical, high-contrast OLED display will nicely decorate any of your designs, for which size and appearance are important ...",
-        image: require("../../icons/OLED_display.jpg"),
-        price: 3.18,
-        category: "displays",
-    },
-    {
-        id: "4",
-        title: 'GPS module NEO-7M Mini SMA',
-        text:
-            "GPS modules of the NEO-7 series are Multi-GNSS receivers. These modules are an excellent solution for portable and autonomous systems that require positioning information and accurate time with low power consumption and compact design. ...",
-        image: require("../../icons/NEO-7m.jpg"),
-        price: 9.00,
-        category: "radio_modules",
-    },
-    {
-        id: "5",
-        title: 'Arduino Nano V3 ATmega328P-AU board unsoldered',
-        text:
-            "The Arduino Nano V3.0 is a small, self-contained, breadboard-compatible board built on the ATmega328 microcontroller. ...",
-        image: require("../../icons/arduino_nano.jpg"),
-        price: 6.83,
-        category: "microcontrollers",
-    },
-    {
-        id: "6",
-        title: 'Arduino UNO R3 (CH340)',
-        text:
-            "A replica of the original Arduino UNO board. The CH340 microcircuit is used as a USB-UART adapter, which has proven itself and is characterized by good stability and high data transfer speed, but which requires additional installation of drivers. ...",
-        image: require("../../icons/arduino_uno_r3.jpg"),
-        price: 6.55,
-        category: "microcontrollers",
-    },
-    {
-        id: "7",
-        title: 'ATMEGA328P-PU microcontroller (with Arduino Uno bootloader)',
-        text:
-            "ATMega328P in a DIP package, has a pre-flashed Arduino UNO bootloader (16MHz). This will allow you to use Arduino code in projects without actually using an Arduino board. ...",
-        image: require("../../icons/atmega_328.jpg"),
-        price: 5.48,
-        category: "microcontrollers",
-    },
-];
+import { ItemContext } from "../../context/Items";
 
 const sortOptions = [
     { value: "no_sort", label: "No sort" },
@@ -91,11 +26,12 @@ const filterOptions = [
 const sortingFunctions = {
     "price": (a,b) => a.price - b.price,
     "name": (a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0),
-    "popularity": (a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0),
+    "popularity": (a,b) => b.rating - a.rating,
     "no_sort": () => {}
 };
 
 const Catalog = () => {
+    const data = useContext(ItemContext);
     const [items, setItems] = useState(data);
 
     const [sortMode, setSortMode] = useState("no_sort");
@@ -105,13 +41,14 @@ const Catalog = () => {
 
     const applyFilters = ({sort = sortMode, filter = filterMode, search = searchValue, reverse = reverseSort}) => {
         let newItems = [...data];
-        console.log(search);
+        console.log(data);
 
         const searchPattern = new RegExp(search, "i");
 
         newItems = newItems.filter(a => searchPattern.test(a.title));
 
         newItems.sort(sortingFunctions[sort]);
+        
         if (filter !== "all") {
             newItems = newItems.filter(a => a.category === filter);
         }
@@ -160,7 +97,7 @@ const Catalog = () => {
                         onChange={onSortChange}
                         options={sortOptions}
                     />
-                    <div style={{display: "flex", flexDirection: "column"}}>
+                    <div style={{display: "flex", flexDirection: "column", marginRight: "20px"}}>
                         <SortDirectionButton 
                             type="text"
                             onClick={() => reverseChange(false)}
@@ -182,7 +119,6 @@ const Catalog = () => {
                         onChange={onFilterChange}
                         options={filterOptions}
                     />
-                    {/* <PrimaryButton onClick={applyFilters}>Apply</PrimaryButton> */}
                 </SelectWrapper>
                 <SearchInput 
                     defaultValue={searchValue}
@@ -192,15 +128,19 @@ const Catalog = () => {
             </FiltersContainer>
             <ItemsContainer>
                 {
-                items.map(({ title, text, image, price, id }) => (
+                items.length ?
+                items.map(({ title, text, image, price, id, rating }) => (
                     <CardItem
                         title={title}
                         text={text}
                         imageSrc={image}
                         price={price}
+                        id={id}
+                        rating={rating}
                         key={id}
                     />
-                ))
+                )) :
+                <h2>No Items</h2>
                 }
             </ItemsContainer>
         </div>

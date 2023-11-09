@@ -8,4 +8,8 @@ export const Footer = styled.div`
 
 export const CatdItemWrapper = styled.div`
     margin: 20px 20px;
+    
+    ul {
+        margin-top: 10px;
+    }
 `

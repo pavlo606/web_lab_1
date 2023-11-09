@@ -1,5 +1,4 @@
 import React from "react";
-import { SearchOutlined } from '@ant-design/icons';
 import { InputWrapper } from "./SearchInput.styled";
 
 
