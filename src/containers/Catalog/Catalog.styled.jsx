@@ -4,8 +4,8 @@ import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 export const ItemsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 50px;
+    justify-content: space-between;
+    margin: 0 150px;
 `;
 
 export const FiltersContainer = styled.div`

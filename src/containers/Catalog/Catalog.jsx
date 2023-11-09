@@ -97,7 +97,7 @@ const Catalog = () => {
                         onChange={onSortChange}
                         options={sortOptions}
                     />
-                    <div style={{display: "flex", flexDirection: "column"}}>
+                    <div style={{display: "flex", flexDirection: "column", marginRight: "20px"}}>
                         <SortDirectionButton 
                             type="text"
                             onClick={() => reverseChange(false)}
@@ -119,7 +119,6 @@ const Catalog = () => {
                         onChange={onFilterChange}
                         options={filterOptions}
                     />
-                    {/* <PrimaryButton onClick={applyFilters}>Apply</PrimaryButton> */}
                 </SelectWrapper>
                 <SearchInput 
                     defaultValue={searchValue}
@@ -129,6 +128,7 @@ const Catalog = () => {
             </FiltersContainer>
             <ItemsContainer>
                 {
+                items.length ?
                 items.map(({ title, text, image, price, id, rating }) => (
                     <CardItem
                         title={title}
@@ -139,7 +139,8 @@ const Catalog = () => {
                         rating={rating}
                         key={id}
                     />
-                ))
+                )) :
+                <h2>No Items</h2>
                 }
             </ItemsContainer>
         </div>

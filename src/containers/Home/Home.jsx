@@ -13,18 +13,24 @@ function Home() {
     const [itemsToDisplay, setItemsToDisplay] = useState(data
                                                         .sort((a,b) => b.rating - a.rating)
                                                         .slice(0, currentItemCount));
+    const [buttonLabel, setButtonLabel] = useState("View more")
 
     const showMore = (e) => {
         e.preventDefault();
-        if (currentItemCount < data.length) {
+        if (currentItemCount < data.length){
             currentItemCount += 3;
         } else {
-            return;
+            currentItemCount = 3;
         }
         console.log(currentItemCount);
         setItemsToDisplay(data
                         .sort((a,b) => b.rating - a.rating)
                         .slice(0, currentItemCount));
+        if (currentItemCount >= data.length) {
+            setButtonLabel("View less");
+        } else {
+            setButtonLabel("View more");
+        }
     }
     
     return (
@@ -51,7 +57,7 @@ function Home() {
                 ))}
             </CardsWrapper>
             <ButtonWrapper>
-                <PrimaryButton onClick={showMore} size="large">View more</PrimaryButton>
+                <PrimaryButton onClick={showMore} size="large">{ buttonLabel }</PrimaryButton>
             </ButtonWrapper>
         </HomeWrapper>
     );
