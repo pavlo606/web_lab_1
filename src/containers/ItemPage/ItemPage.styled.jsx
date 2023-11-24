@@ -57,6 +57,6 @@ export const Description = styled.p`
     white-space: pre-wrap;
 `
 
-export const DescriptionContainer = styled.div`
+export const DescriptionContainer = styled.ul`
     margin: 0 300px 0 200px;
 `

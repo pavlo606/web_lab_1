@@ -1,36 +1,47 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArduinoImg from "../../icons/arduino_uno.jpg";
 import { HomeWrapper, DesctriptionWrapper, CardsWrapper, ButtonWrapper } from "./Home.styled";
 import CardItem from "../../components/CardItem/CardItem";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
-import { ItemContext } from "../../context/Items";
+import { ItemsBaseURL } from "../../API/api";
+import axios from "axios";
 
 let currentItemCount = 3;
 
 function Home() {
-    const data = useContext(ItemContext);
-
-    const [itemsToDisplay, setItemsToDisplay] = useState(data
-                                                        .sort((a,b) => b.rating - a.rating)
-                                                        .slice(0, currentItemCount));
+    const [itemsToDisplay, setItemsToDisplay] = useState([]);
     const [buttonLabel, setButtonLabel] = useState("View more")
+
+    useEffect(() => {
+        axios.get(`${ItemsBaseURL}`, {
+            params: {
+                filter: "all",
+                sort: "rating",
+                reverse_sort: "true",
+                search: "",
+                limit: currentItemCount,
+            }
+        }).then((response) => {
+            setItemsToDisplay(response.data);
+        });
+    }, [])
 
     const showMore = (e) => {
         e.preventDefault();
-        if (currentItemCount < data.length){
-            currentItemCount += 3;
-        } else {
-            currentItemCount = 3;
-        }
-        console.log(currentItemCount);
-        setItemsToDisplay(data
-                        .sort((a,b) => b.rating - a.rating)
-                        .slice(0, currentItemCount));
-        if (currentItemCount >= data.length) {
-            setButtonLabel("View less");
-        } else {
-            setButtonLabel("View more");
-        }
+        // if (currentItemCount < data.length){
+        //     currentItemCount += 3;
+        // } else {
+        //     currentItemCount = 3;
+        // }
+        // console.log(currentItemCount);
+        // setItemsToDisplay(data
+        //                 .sort((a,b) => b.rating - a.rating)
+        //                 .slice(0, currentItemCount));
+        // if (currentItemCount >= data.length) {
+        //     setButtonLabel("View less");
+        // } else {
+        //     setButtonLabel("View more");
+        // }
     }
     
     return (
