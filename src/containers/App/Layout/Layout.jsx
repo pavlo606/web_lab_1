@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     AppstoreOutlined,
     HomeOutlined,
@@ -28,20 +28,12 @@ const items = [
 ];
 
 function Layout() {
-    const [currentPage, setCurrentPage] = useState('home');
-
-    const onClick = (e) => {
-        console.log('click ', e);
-        setCurrentPage(e.key);
-    };
-    
     return (
         <StyledHeader>
             <img src={logo} alt="" width={100} />
 
             <LinkingWrapper>
-                <Menu 
-                    onClick={onClick} 
+                <Menu
                     selectedKeys={[]} 
                     mode="horizontal" 
                     defaultSelectedKeys={['home']}
