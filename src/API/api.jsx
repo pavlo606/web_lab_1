@@ -11,7 +11,6 @@ export const getItems = async (params, callback) => {
 
 export const getFilters = async (callback) => {
     axios.get(`${ItemsBaseURL}/category`).then((response) => {
-        console.log(response.data);
         let resp = response.data.map((item) => ({ 
             value: item,
             label: item

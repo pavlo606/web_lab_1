@@ -5,23 +5,17 @@ import PrimarySelect from "../../components/PrimarySelect/PrimarySelect";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import {
     CaretUpOutlined,
-    CaretDownOutlined
+    CaretDownOutlined,
+    LoadingOutlined
 } from "@ant-design/icons";
-import axios from "axios";
-import { ItemsBaseURL, getFilters, getItems } from "../../API/api";
+import { Spin } from 'antd';
+import { getFilters, getItems } from "../../API/api";
 
 const sortOptions = [
     { value: "name", label: "Sort by name" },
     { value: "price", label: "Sort by price" },
-    { value: "popularity", label: "Sort by popularity" },
+    { value: "rating", label: "Sort by popularity" },
 ];
-
-// const filterOptions = [
-//     { value: "all", label: "All categories" },
-//     { value: "microcontrollers", label: "Microcontrollers" },
-//     { value: "radio_modules", label: "Radio-modules" },
-//     { value: "displays", label: "Displays" },
-// ];
 
 const Catalog = () => {
     const [items, setItems] = useState([]);
@@ -31,51 +25,42 @@ const Catalog = () => {
     const [filterMode, setFilterMode] = useState("all");
     const [searchValue, setSearchValue] = useState("");
     const [reverseSort, setReverseSort] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        getFilters((filters) => setfilterOptions(filters));
+    }, [])
+
+    useEffect(() => {
+        setIsLoading(true);
         getItems({
             filter: filterMode,
             sort: sortMode,
             reverse_sort: reverseSort,
             search: searchValue,
-        }, setItems);
-        getFilters((filters) => setfilterOptions(filters));
-    }, []);
-
-    const applyFilters = ({sort = sortMode, filter = filterMode, search = searchValue, reverse = reverseSort}) => {
-        getItems({
-            filter,
-            sort,
-            reverse_sort: reverse,
-            search,
-        }, setItems);
-    }
+        }, (val) => {
+            setItems(val);
+            setIsLoading(false);
+        });
+    }, [filterMode, sortMode, searchValue, reverseSort]);
 
     const onSortChange = (value) => {
-        console.log(value);
         setSortMode(value);
         setReverseSort(false);
-        applyFilters({sort: value, reverse: false});
     }
 
     const onFilterChange = (value) => {
-        console.log(value);
         setFilterMode(value);
         setReverseSort(false);
-        applyFilters({filter: value, reverse: false});
     }
 
     const onSearch = (value) => {
-        console.log(value);
         setSearchValue(value);
         setReverseSort(false);
-        applyFilters({search: value,  reverse: false});
     }
 
     const reverseChange = (reverse) => {
         setReverseSort(reverse);
-        console.log(reverse);
-        applyFilters({reverse: reverse});
     }
 
     return (
@@ -130,7 +115,10 @@ const Catalog = () => {
                         key={id}
                     />
                 )) :
-                <h2>No Items</h2>
+                ( isLoading ?
+                    <Spin style={{ margin: "auto" }} indicator={<LoadingOutlined style={{ fontSize: 36 }} spin />} /> :
+                    <h2>No Items</h2>
+                )
                 }
             </ItemsContainer>
         </div>

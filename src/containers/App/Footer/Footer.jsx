@@ -1,13 +1,12 @@
 import React from "react";
 import logo from "../../../icons/logo.svg";
-import { HorizontalLine, StyledFooter, IconsWrapper, IconBase, Wrapper, StyledText } from "./Footer.styled";
+import { HorizontalLine, StyledFooter, IconsWrapper, Wrapper, StyledText } from "./Footer.styled";
 import LinkedImg from "../../../components/LinkedImg/LinkedImg";
-import Icon, {
+import {
     TwitterOutlined,
     YoutubeOutlined,
     LinkedinOutlined,
-    FacebookOutlined,
-    AliwangwangOutlined
+    FacebookOutlined
 } from "@ant-design/icons";
 
 function Footer() {

@@ -1,4 +1,3 @@
-import Layout from "./Layout/Layout";
 import React from "react";
 import Navigation from "../Navigation/Navigation";
 import Footer from "./Footer/Footer";

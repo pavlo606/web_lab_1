@@ -11,13 +11,12 @@ const { Meta } = Card;
 
 const CardItem = ({ title = 'No title.', text = 'No text', imageSrc, price, id, rating }) => {
     const navigate = useNavigate();
-    console.log(imageSrc);
     const [imageData, setImageData] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         downloadImage(imageSrc, setImageData, setLoading);
-    }, [])
+    }, [imageSrc])
 
     return (
         <CatdItemWrapper>
@@ -25,11 +24,10 @@ const CardItem = ({ title = 'No title.', text = 'No text', imageSrc, price, id, 
                 hoverable
                 style={{ width: 350, borderRadius: "20px" }}
                 cover={
-                    // <img style={{ borderRadius: "20px" }} alt="example" src={require(`../../icons/${imageSrc}`)} />
                     loading ? (
                         <div>Loading...</div>
                     ) : (
-                        imageData && <img src={imageData} alt="Downloaded Image" />
+                        imageData && <img src={imageData} alt={imageSrc} />
                     )
                 }
             >

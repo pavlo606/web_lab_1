@@ -6,42 +6,28 @@ import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { ItemsBaseURL } from "../../API/api";
 import axios from "axios";
 
-let currentItemCount = 3;
+const initItemCount = 3;
 
 function Home() {
     const [itemsToDisplay, setItemsToDisplay] = useState([]);
-    const [buttonLabel, setButtonLabel] = useState("View more")
+    const [buttonLabel, setButtonLabel] = useState("View more");
 
     useEffect(() => {
-        axios.get(`${ItemsBaseURL}`, {
+        axios.get(`${ItemsBaseURL}/best`, {
             params: {
-                filter: "all",
-                sort: "rating",
-                reverse_sort: "true",
-                search: "",
-                limit: currentItemCount,
+                limit: initItemCount,
             }
         }).then((response) => {
-            setItemsToDisplay(response.data);
+            setItemsToDisplay(response.data.items);
         });
     }, [])
 
     const showMore = (e) => {
         e.preventDefault();
-        // if (currentItemCount < data.length){
-        //     currentItemCount += 3;
-        // } else {
-        //     currentItemCount = 3;
-        // }
-        // console.log(currentItemCount);
-        // setItemsToDisplay(data
-        //                 .sort((a,b) => b.rating - a.rating)
-        //                 .slice(0, currentItemCount));
-        // if (currentItemCount >= data.length) {
-        //     setButtonLabel("View less");
-        // } else {
-        //     setButtonLabel("View more");
-        // }
+        axios.get(`${ItemsBaseURL}/best`).then((response) => {
+            setItemsToDisplay(response.data.items);
+            setButtonLabel(response.data.view_more ? "View more" : "View less");
+        });
     }
     
     return (

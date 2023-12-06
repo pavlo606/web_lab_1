@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from 'react-router-dom';
 import { InputNumber, Rate } from 'antd';
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
-import { CategoryWrapper, Description, DescriptionContainer, ItemContainer, SubmitContainer, Title } from "./ItemPage.styled";
+import { CategoryWrapper, DescriptionContainer, ItemContainer, SubmitContainer, Title } from "./ItemPage.styled";
 import { ItemsBaseURL, downloadImage } from "../../API/api";
 import axios from "axios";
 import ProductDescription from "../../components/ProductDescription/ProductDescription";
@@ -22,7 +22,7 @@ const ItemPage = () => {
         }).then((response) => {
             setCurrentItem(response.data[0]);
         });
-    }, []);
+    }, [itemId]);
 
     useEffect(() => {
         if (currentItem) {
@@ -39,7 +39,7 @@ const ItemPage = () => {
                         {loading ? (
                             <div>Loading...</div>
                         ) : (
-                            imageData && <img src={imageData} alt="Downloaded Image" />
+                            imageData && <img src={imageData} alt={currentItem.image} />
                         )}
                         <div>
                             <CategoryWrapper>
