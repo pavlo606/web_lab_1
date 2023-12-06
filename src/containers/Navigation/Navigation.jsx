@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import Catalog from "../Catalog/Catalog";
 import Layout from "../App/Layout/Layout";
 import ItemPage from "../ItemPage/ItemPage";
+import Cart from "../Cart/Cart";
 
 function Navigation() {
 
@@ -13,7 +14,7 @@ function Navigation() {
             <Routes>
                 <Route path="/" element={<Home />} key="/" />
                 <Route path="/catalog" element={<Catalog />} key="/catalog" />
-                <Route path="/cart" element={<h1>Cart</h1>} key="/cart" />
+                <Route path="/cart" element={<Cart />} key="/cart" />
                 <Route path="/item/:itemId" element={<ItemPage />} key="/cart" />
                 <Route path="/*" element={<Navigate to="/" />} key="/*" />
             </Routes>
