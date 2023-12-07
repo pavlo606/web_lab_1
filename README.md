@@ -38,3 +38,7 @@
 Посилання на вітку [тут](https://github.com/pavlo606/web_lab_1/pull/9)
 
 ***
+### Лабораторна робота №10 (Варіант 5)
+Посилання на вітку [тут](https://github.com/pavlo606/web_lab_1/pull/10)
+
+***
