@@ -3,16 +3,21 @@ import { useParams, Link } from 'react-router-dom';
 import { InputNumber, Rate } from 'antd';
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { CategoryWrapper, DescriptionContainer, ItemContainer, SubmitContainer, Title } from "./ItemPage.styled";
-import { ItemsBaseURL, downloadImage } from "../../API/api";
+import { ItemsBaseURL } from "../../API/api";
 import axios from "axios";
 import ProductDescription from "../../components/ProductDescription/ProductDescription";
+import { useDispatch } from "react-redux";
+import { addItem } from "../Cart/actions/actions";
+import LoadImage from "../../components/LoadImage/LoadImage";
+
 
 const ItemPage = () => {
     const { itemId } = useParams();
 
     const [currentItem, setCurrentItem] = useState(null);
-    const [imageData, setImageData] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [itemsCount, setItemsCount] = useState(1);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         axios.get(`${ItemsBaseURL}`, {
@@ -24,11 +29,16 @@ const ItemPage = () => {
         });
     }, [itemId]);
 
-    useEffect(() => {
-        if (currentItem) {
-            downloadImage(currentItem.image, setImageData, setLoading);
-        }
-    }, [currentItem]);
+    const onAddToCard = () => {
+        dispatch(addItem({
+            id: currentItem.id,
+            img: currentItem.image,
+            title: currentItem.title,
+            price: currentItem.price,
+            count: itemsCount,
+            max_count: currentItem.quantity
+        }))
+    };
 
     return (
         <div>
@@ -36,11 +46,7 @@ const ItemPage = () => {
                 <div>
                     <Title>{currentItem.title}</Title>
                     <ItemContainer>
-                        {loading ? (
-                            <div>Loading...</div>
-                        ) : (
-                            imageData && <img src={imageData} alt={currentItem.image} />
-                        )}
+                        <LoadImage image={currentItem.image} />
                         <div>
                             <CategoryWrapper>
                                 <Link to="#">{currentItem.category}</Link>
@@ -49,8 +55,20 @@ const ItemPage = () => {
                                 <h3>{currentItem.price}$</h3>
                                 <div>
                                     {currentItem.quantity ? false : true && <p>Item is out of stock</p>}
-                                    <InputNumber disabled={currentItem.quantity ? false : true} min={1} max={currentItem.quantity} defaultValue={1} />
-                                    <PrimaryButton disabled={currentItem.quantity ? false : true}>Add to cart</PrimaryButton>
+                                    <InputNumber 
+                                        disabled={currentItem.quantity ? false : true} 
+                                        min={1} 
+                                        max={currentItem.quantity} 
+                                        defaultValue={itemsCount}
+                                        onChange={setItemsCount}
+                                    />
+                                    <Link to="/cart">
+                                    <PrimaryButton 
+                                        disabled={currentItem.quantity ? false : true}
+                                        onClick={onAddToCard}
+                                    >Add to cart
+                                    </PrimaryButton>
+                                    </Link>
                                 </div>
                                 <br />
                                 <Rate allowHalf disabled defaultValue={currentItem.rating} />
