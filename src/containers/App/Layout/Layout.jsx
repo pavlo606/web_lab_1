@@ -5,9 +5,10 @@ import {
     ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
+import { Link } from "react-router-dom";
+
 import logo from "../../../icons/logo.svg";
 import { LinkingWrapper, StyledHeader } from "./Layout.styled";
-import { Link } from "react-router-dom";
 
 const items = [
     {

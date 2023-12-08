@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "../../../icons/logo.svg";
-import { HorizontalLine, StyledFooter, IconsWrapper, Wrapper, StyledText } from "./Footer.styled";
-import LinkedImg from "../../../components/LinkedImg/LinkedImg";
 import {
     TwitterOutlined,
     YoutubeOutlined,
     LinkedinOutlined,
     FacebookOutlined
 } from "@ant-design/icons";
+
+import logo from "../../../icons/logo.svg";
+import LinkedImg from "../../../components/LinkedImg/LinkedImg";
+import { HorizontalLine, StyledFooter, IconsWrapper, Wrapper, StyledText } from "./Footer.styled";
 
 function Footer() {
     return (

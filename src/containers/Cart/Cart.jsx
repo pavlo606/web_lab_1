@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
+
 import ItemCart from "../../components/ItemCart/ItemCart";
-import { CartContainer, ButtonsWrapper } from "./Cart.styled";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import { CartContainer, ButtonsWrapper } from "./Cart.styled";
 
 const Cart = () => {
     const itemList = useSelector((state) => state.itemList);
@@ -33,7 +34,9 @@ const Cart = () => {
                 <Link to="/catalog">
                     <PrimaryButton>Back to Catalog</PrimaryButton>
                 </Link>
-                <PrimaryButton>Continue</PrimaryButton>
+                <Link to="/checkout">
+                    <PrimaryButton type="primary">Continue</PrimaryButton>
+                </Link>
             </ButtonsWrapper>
         </CartContainer>
     )
