@@ -9,7 +9,6 @@ import { CartContainer, ButtonsWrapper } from "./Cart.styled";
 const Cart = () => {
     const itemList = useSelector((state) => state.itemList);
     const [totalPrice, setTotalPrice] = useState(0);
-    // console.log(itemList);
 
     useEffect(() => {
         let sum = 0;

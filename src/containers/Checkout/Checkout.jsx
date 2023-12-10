@@ -61,7 +61,7 @@ const Checkout = () => {
                     payment: '',
                 }}
                 validationSchema={SignupSchema}
-                onSubmit={values => {
+                onSubmit={() => {
                     navigate("/success");
                     dispatch(deleteAll());
                 }}

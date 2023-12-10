@@ -52,7 +52,7 @@ export const reducer = (state = defaultState, action) => {
 
         case "ADD_USER":
             const userIndex = state.users.findIndex(
-                (item) => item.username === action.payLoad.username
+                (item) => item.username === action.payLoad.username || item.email === action.payLoad.email
             );
 
             if (userIndex === -1) {

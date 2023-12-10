@@ -16,7 +16,7 @@ const LoginSchema = Yup.object().shape({
         .required('Required'),
 });
 
-const Login = () => {
+const Login = ({ setAuth }) => {
     const userList = useSelector((state) => state.users);
 
     return (
@@ -29,6 +29,7 @@ const Login = () => {
                     const foundUser = userList.find((a) => a.email === values.email);
                     if (foundUser.password === values.password) {
                         localStorage.setItem('login', JSON.stringify(foundUser));
+                        setAuth(foundUser);
                         return;
                     }
                     alert("Wrong email or password");

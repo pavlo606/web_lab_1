@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
@@ -10,7 +10,7 @@ import { SignUpWrapper, InputWrapper } from "./SignUp.styled";
 
 const SignUpSchema = Yup.object().shape({
     username: Yup.string()
-        .min(3, 'Name must have at least 3 characters')
+        .min(3, 'Username must have at least 3 characters')
         .required('Required'),
     email: Yup.string()
         .matches(/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/, 'Invalid email')
@@ -24,8 +24,9 @@ const SignUpSchema = Yup.object().shape({
 });
 
 
-const SignUp = () => {
+const SignUp = ({ setAuth }) => {
     const dispatch = useDispatch();
+    const userList = useSelector((state) => state.users);
 
     return (
         <SignUpWrapper>
@@ -39,8 +40,21 @@ const SignUp = () => {
                     confirmPassword: "",
                 }}
                 onSubmit={(values) => {
+                    if (userList.find((a) => a.username === values.username)) {
+                        alert("This username is already using");
+                        return;
+                    }
+                    if (userList.find((a) => a.email === values.email)) {
+                        alert("This email is already using");
+                        return;
+                    }
                     dispatch(addUser(values));
-                    console.log(values);
+                    localStorage.setItem("login", JSON.stringify({
+                        username: values.username,
+                        email: values.email,
+                        password: values.password,
+                    }));
+                    setAuth(values);
                 }}
             >
                 {({ errors, touched }) => (
