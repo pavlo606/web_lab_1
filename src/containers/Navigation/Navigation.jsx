@@ -8,6 +8,8 @@ import ItemPage from "../ItemPage/ItemPage";
 import Cart from "../Cart/Cart";
 import Checkout from "../Checkout/Checkout";
 import Success from "../Success/Success";
+import Login from "../Auth/Login/Login";
+import SignUp from "../Auth/SignUp/SignUp";
 
 function Navigation() {
 
@@ -21,6 +23,8 @@ function Navigation() {
                 <Route path="/item/:itemId" element={<ItemPage />} key="/item" />
                 <Route path="/checkout" element={<Checkout />} key="/checkout" />
                 <Route path="/success" element={<Success />} key="/success" />
+                <Route path="/login" element={<Login />} key="/login" />
+                <Route path="/signup" element={<SignUp />} key="/signup" />
                 <Route path="/*" element={<Navigate to="/" />} key="/*" />
             </Routes>
         </div>
