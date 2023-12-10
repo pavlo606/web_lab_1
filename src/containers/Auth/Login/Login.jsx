@@ -23,7 +23,7 @@ const Login = () => {
                 validationSchema={LoginSchema}
                 initialValues={{ email: "", password: "" }}
                 onSubmit={(values) => {
-                    alert(JSON.stringify(values));
+                    localStorage.setItem('login', JSON.stringify(values));
                 }}
             >
                 {({ errors, touched }) => (

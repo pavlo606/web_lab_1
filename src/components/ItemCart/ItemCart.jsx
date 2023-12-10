@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import LoadImage from "../LoadImage/LoadImage";
-import { incrementCount, decrementCount, deleteItem } from "../../containers/Cart/actions/actions"
+import { incrementCount, decrementCount, deleteItem } from "../../redux/actions/actions"
 import { ItemWrapper, Counter, PriceWrapper, PriceButtonWrapper } from "./ItemCart.styled";
 
 const ItemCart = ({ item }) => {

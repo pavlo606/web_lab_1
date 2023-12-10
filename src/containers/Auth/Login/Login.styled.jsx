@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const LoginWrapper = styled.div`
     width: 600px;
-    margin: 0 auto;
+    margin: 100px auto;
     padding: 20px;
     border: 1px solid gray;
     font-size: 1.2rem;
@@ -15,7 +15,6 @@ export const LoginWrapper = styled.div`
     form {
         display: flex;
         flex-direction: column;
-        /* align-items: center; */
     }
 
     h2 {

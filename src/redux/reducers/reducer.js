@@ -1,5 +1,6 @@
 const defaultState = {
     itemList: [],
+    users: [],
 };
 
 export const reducer = (state = defaultState, action) => {
@@ -48,6 +49,24 @@ export const reducer = (state = defaultState, action) => {
             };
         case "CLEAR_ITEMS":
             return { ...state, itemList: []}
+
+        case "ADD_USER":
+            const userIndex = state.users.findIndex(
+                (item) => item.id === action.payLoad.id
+            );
+
+            if (userIndex === -1) {
+                return {
+                    ...state,
+                    users: [...state.users, action.payLoad]
+                }
+            }
+
+            return state;
+
+        // case "DELETE_USERS":
+        //     return state;
+
         default:
             return state;
     }

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Yup from 'yup';
 
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
-import { deleteAll } from "../Cart/actions/actions";
+import { deleteAll } from "../../redux/actions/actions";
 import { StyledCheckout, ButtonWrapper, InputWrapper, PaymentWrapper } from "./Checkout.styled";
 
 const SignupSchema = Yup.object().shape({
