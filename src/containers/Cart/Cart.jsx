@@ -35,7 +35,7 @@ const Cart = () => {
                     <PrimaryButton>Back to Catalog</PrimaryButton>
                 </Link>
                 <Link to="/checkout">
-                    <PrimaryButton type="primary">Continue</PrimaryButton>
+                    <PrimaryButton type="primary" disabled={itemList.length <= 0}>Continue</PrimaryButton>
                 </Link>
             </ButtonsWrapper>
         </CartContainer>

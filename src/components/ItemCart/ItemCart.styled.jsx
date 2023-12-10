@@ -7,7 +7,7 @@ export const ItemWrapper = styled.div`
     justify-content: space-between;
     border: 1px solid black;
     margin: 0 100px;
-    padding-left: 20px;
+    padding: 0 20px;
     height: 150px;
 
     > div {

@@ -22,7 +22,7 @@ const items = [
         icon: <AppstoreOutlined />
     },
     {
-        label: (<Link to="/cart">cart</Link>),
+        label: (<Link to="/cart">Cart</Link>),
         key: 'cart',
         icon: <ShoppingCartOutlined />
     }

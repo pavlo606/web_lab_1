@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as Yup from 'yup';
 
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import { deleteAll } from "../Cart/actions/actions";
 import { StyledCheckout, ButtonWrapper, InputWrapper, PaymentWrapper } from "./Checkout.styled";
 
 const SignupSchema = Yup.object().shape({
@@ -17,7 +18,7 @@ const SignupSchema = Yup.object().shape({
         .max(50, 'Too Long!')
         .required('Required'),
     email: Yup.string()
-        .email('Invalid email')
+        .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Invalid email')
         .required('Required'),
     phone: Yup.number()
         .integer('Cannot have decimal')
@@ -35,6 +36,8 @@ const Checkout = () => {
     const navigate = useNavigate();
     const itemList = useSelector((state) => state.itemList);
     const [totalPrice, setTotalPrice] = useState(0);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         let sum = 0;
@@ -59,8 +62,8 @@ const Checkout = () => {
                 }}
                 validationSchema={SignupSchema}
                 onSubmit={values => {
-                    console.log(values);
                     navigate("/success");
+                    dispatch(deleteAll());
                 }}
             >
                 {({ errors, touched }) => (
