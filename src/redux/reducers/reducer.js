@@ -52,7 +52,7 @@ export const reducer = (state = defaultState, action) => {
 
         case "ADD_USER":
             const userIndex = state.users.findIndex(
-                (item) => item.id === action.payLoad.id
+                (item) => item.username === action.payLoad.username
             );
 
             if (userIndex === -1) {
@@ -63,9 +63,13 @@ export const reducer = (state = defaultState, action) => {
             }
 
             return state;
-
-        // case "DELETE_USERS":
-        //     return state;
+        case "DELETE_USER":
+            return {
+                ...state,
+                users: state.users.filter((item) => item.username !== action.payLoad.username),
+            };
+        case "CLEAR_USERS":
+            return { ...state, users: []}
 
         default:
             return state;

@@ -45,3 +45,30 @@ export const deleteAll = () => {
         payLoad: {}
     }
 }
+
+export const addUser = ({ username, email, password, }) => {
+    return {
+        type: "ADD_USER",
+        payLoad: {
+            username,
+            email,
+            password,
+        },
+    };
+};
+
+export const deleteUser = (username) => {
+    return {
+        type: "DELETE_USER",
+        payLoad: {
+            username
+        }
+    }
+}
+
+export const deleteAllUsers = () => {
+    return {
+        type: "CLEAR_USERS",
+        payLoad: {}
+    }
+}

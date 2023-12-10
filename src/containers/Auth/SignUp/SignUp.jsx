@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
+import { addUser } from "../../../redux/actions/actions";
 import { SignUpWrapper, InputWrapper } from "./SignUp.styled";
 
 const SignUpSchema = Yup.object().shape({
@@ -23,6 +25,8 @@ const SignUpSchema = Yup.object().shape({
 
 
 const SignUp = () => {
+    const dispatch = useDispatch();
+
     return (
         <SignUpWrapper>
             <h2>Sign Up</h2>
@@ -35,7 +39,8 @@ const SignUp = () => {
                     confirmPassword: "",
                 }}
                 onSubmit={(values) => {
-                    alert(JSON.stringify(values));
+                    dispatch(addUser(values));
+                    console.log(values);
                 }}
             >
                 {({ errors, touched }) => (

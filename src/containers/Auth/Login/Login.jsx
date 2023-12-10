@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
@@ -16,6 +17,8 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+    const userList = useSelector((state) => state.users);
+
     return (
         <LoginWrapper>
             <h2>Login</h2>
@@ -23,7 +26,12 @@ const Login = () => {
                 validationSchema={LoginSchema}
                 initialValues={{ email: "", password: "" }}
                 onSubmit={(values) => {
-                    localStorage.setItem('login', JSON.stringify(values));
+                    const foundUser = userList.find((a) => a.email === values.email);
+                    if (foundUser.password === values.password) {
+                        localStorage.setItem('login', JSON.stringify(foundUser));
+                        return;
+                    }
+                    alert("Wrong email or password");
                 }}
             >
                 {({ errors, touched }) => (
