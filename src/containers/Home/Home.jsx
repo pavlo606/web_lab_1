@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import ArduinoImg from "../../icons/arduino_uno.jpg";
-import { HomeWrapper, DesctriptionWrapper, CardsWrapper, ButtonWrapper } from "./Home.styled";
 import CardItem from "../../components/CardItem/CardItem";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { ItemsBaseURL } from "../../API/api";
-import axios from "axios";
+import { HomeWrapper, DesctriptionWrapper, CardsWrapper, ButtonWrapper } from "./Home.styled";
 
 const initItemCount = 3;
 

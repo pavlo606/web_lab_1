@@ -38,3 +38,10 @@ export const deleteItem = (id) => {
         }
     }
 }
+
+export const deleteAll = () => {
+    return {
+        type: "CLEAR_ITEMS",
+        payLoad: {}
+    }
+}

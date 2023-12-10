@@ -1,9 +1,10 @@
 import React from "react";
 import { Card, Rate } from "antd";
-import { Footer, CatdItemWrapper } from "./CardItem.styled";
-import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+
+import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import LoadImage from "../LoadImage/LoadImage";
+import { Footer, CatdItemWrapper } from "./CardItem.styled";
 
 const MAX_TEXT_LEN = 200;
 

@@ -1,9 +1,10 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistor } from "../Cart/store";
+
 import Navigation from "../Navigation/Navigation";
 import Footer from "./Footer/Footer";
+import { store, persistor } from "../Cart/store";
 
 function App() {
   return (

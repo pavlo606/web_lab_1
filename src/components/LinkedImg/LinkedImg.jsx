@@ -1,4 +1,5 @@
 import React from "react";
+
 import { IconBase } from "./LinkedImg.styled";
 
 const LinkedImg = ({ href, component, color='#000000', ...props }) => (

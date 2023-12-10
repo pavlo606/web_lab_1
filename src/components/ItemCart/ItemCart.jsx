@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { ItemWrapper, Counter, PriceWrapper, PriceButtonWrapper } from "./ItemCart.styled";
+
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import LoadImage from "../LoadImage/LoadImage";
 import { incrementCount, decrementCount, deleteItem } from "../../containers/Cart/actions/actions"
+import { ItemWrapper, Counter, PriceWrapper, PriceButtonWrapper } from "./ItemCart.styled";
 
 const ItemCart = ({ item }) => {
     const dispatch = useDispatch();

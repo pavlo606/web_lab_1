@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { FiltersContainer, ItemsContainer, SelectWrapper, SortDirectionButton } from "./Catalog.styled";
-import CardItem from "../../components/CardItem/CardItem";
-import PrimarySelect from "../../components/PrimarySelect/PrimarySelect";
-import SearchInput from "../../components/SearchInput/SearchInput";
 import {
     CaretUpOutlined,
     CaretDownOutlined,
     LoadingOutlined
 } from "@ant-design/icons";
 import { Spin } from 'antd';
+
+import CardItem from "../../components/CardItem/CardItem";
+import PrimarySelect from "../../components/PrimarySelect/PrimarySelect";
+import SearchInput from "../../components/SearchInput/SearchInput";
 import { getFilters, getItems } from "../../API/api";
+import { FiltersContainer, ItemsContainer, SelectWrapper, SortDirectionButton } from "./Catalog.styled";
 
 const sortOptions = [
     { value: "name", label: "Sort by name" },

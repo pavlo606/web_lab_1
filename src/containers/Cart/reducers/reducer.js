@@ -46,6 +46,8 @@ export const reducer = (state = defaultState, action) => {
                 ...state,
                 itemList: state.itemList.filter((item) => item.id !== action.payLoad.id),
             };
+        case "CLEAR_ITEMS":
+            return { ...state, itemList: []}
         default:
             return state;
     }

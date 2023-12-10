@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const ItemsBaseURL = "http://127.0.0.1:5000/items";
 
 export const getItems = async (params, callback) => {
@@ -11,7 +10,7 @@ export const getItems = async (params, callback) => {
 
 export const getFilters = async (callback) => {
     axios.get(`${ItemsBaseURL}/category`).then((response) => {
-        let resp = response.data.map((item) => ({ 
+        let resp = response.data.map((item) => ({
             value: item,
             label: item
         }));

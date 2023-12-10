@@ -20,8 +20,7 @@ export const ButtonsWrapper = styled.div`
     margin: 0 100px;
 
     button {
-        font-size: 1em;
-        height: 2em;
-        font-weight: 500;
+        font-size: 1rem;
+        height: 100%;
     }
 `
