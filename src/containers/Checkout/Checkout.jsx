@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Yup from 'yup';
 
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
-import { deleteAll } from "../Cart/actions/actions";
+import { deleteAll } from "../../redux/actions/actions";
 import { StyledCheckout, ButtonWrapper, InputWrapper, PaymentWrapper } from "./Checkout.styled";
 
 const SignupSchema = Yup.object().shape({
@@ -18,7 +18,7 @@ const SignupSchema = Yup.object().shape({
         .max(50, 'Too Long!')
         .required('Required'),
     email: Yup.string()
-        .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Invalid email')
+        .matches(/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/, 'Invalid email')
         .required('Required'),
     phone: Yup.number()
         .integer('Cannot have decimal')
@@ -61,7 +61,7 @@ const Checkout = () => {
                     payment: '',
                 }}
                 validationSchema={SignupSchema}
-                onSubmit={values => {
+                onSubmit={() => {
                     navigate("/success");
                     dispatch(deleteAll());
                 }}

@@ -4,7 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import Navigation from "../Navigation/Navigation";
 import Footer from "./Footer/Footer";
-import { store, persistor } from "../Cart/store";
+import { store, persistor } from "../../redux/store";
 
 function App() {
   return (

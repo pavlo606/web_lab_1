@@ -8,11 +8,10 @@ export const StyledHeader = styled.div`
     border-style: solid;
     border-color: black;
     display: flex;
+    justify-content: space-between;
 `;
 
 export const LinkingWrapper = styled.div`
-    width: 100%;
-    margin-right: 100px;
     display: flex;
     justify-content: center;
 
@@ -24,3 +23,9 @@ export const LinkingWrapper = styled.div`
         margin: 0 16px;
     }
 `;
+
+export const UserWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+`

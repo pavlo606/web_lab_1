@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from 'react-router-dom';
 import { InputNumber, Rate } from 'antd';
+import { useDispatch } from "react-redux";
 
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import ProductDescription from "../../components/ProductDescription/ProductDescription";
 import LoadImage from "../../components/LoadImage/LoadImage";
-import { useDispatch } from "react-redux";
-import { addItem } from "../Cart/actions/actions";
+import { addItem } from "../../redux/actions/actions";
 import { ItemsBaseURL } from "../../API/api";
 import { CategoryWrapper, DescriptionContainer, ItemContainer, SubmitContainer, Title } from "./ItemPage.styled";
 
@@ -37,7 +37,8 @@ const ItemPage = () => {
             title: currentItem.title,
             price: currentItem.price,
             count: itemsCount,
-            max_count: currentItem.quantity
+            max_count: currentItem.quantity,
+            user: JSON.parse(localStorage.getItem("login")).username,
         }))
     };
 
