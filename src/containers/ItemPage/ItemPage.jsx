@@ -37,7 +37,8 @@ const ItemPage = () => {
             title: currentItem.title,
             price: currentItem.price,
             count: itemsCount,
-            max_count: currentItem.quantity
+            max_count: currentItem.quantity,
+            user: JSON.parse(localStorage.getItem("login")).username,
         }))
     };
 

@@ -1,4 +1,4 @@
-export const addItem = ({ id, img, title, price, count, max_count }) => {
+export const addItem = ({ id, img, title, price, count, max_count, user }) => {
     return {
         type: "ADD_ITEM",
         payLoad: {
@@ -8,6 +8,7 @@ export const addItem = ({ id, img, title, price, count, max_count }) => {
             price,
             count,
             max_count,
+            user,
         },
     };
 };

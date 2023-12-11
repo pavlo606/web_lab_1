@@ -7,7 +7,7 @@ import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { CartContainer, ButtonsWrapper } from "./Cart.styled";
 
 const Cart = () => {
-    const itemList = useSelector((state) => state.itemList);
+    const itemList = useSelector((state) => state.itemList).filter((val) => val.user === JSON.parse(localStorage.getItem("login")).username);
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
